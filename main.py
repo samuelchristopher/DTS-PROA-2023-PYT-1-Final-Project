@@ -130,14 +130,6 @@ def updateBook(id: int, book: schemas.Book, session=Depends(get_session)):
         )
 
     # else mapping data to Book models using Book schemas and insert to database
-    if book.title == "":
-        book.title = data.title
-    if book.year == "":
-        book.year = data.year
-    if book.author == "":
-        book.author = data.author
-    if book.publisher == "":
-        book.publisher = data.publisher
     data.title = book.title
     data.year = book.year
     data.author = book.author

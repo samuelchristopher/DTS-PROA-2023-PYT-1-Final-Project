@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Simple Python REST API</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../assets/dist/css/sticky-footer-navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+  </head>
+  <body class="d-flex flex-column h-100">
+    
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Simple Python REST API</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main role="main" class="flex-shrink-0">
+      <div class="container">
+        <h1 class="mt-5">Simple Python REST API</h1>
+      </div>
+      <div class="container">
+        <form id="book-form">
+          <div class="form-group">
+            <label for="book_id">ID</label>
+            <input type="text" class="form-control" id="book_id" name="book_id">
+          </div>
+          <div class="form-group">
+            <label for="book_title">Title</label>
+            <input type="text" class="form-control" id="book_title" name="book_title" placeholder="Title">
+          </div>
+          <div class="form-group">
+            <label for="book_year">Year</label>
+            <input type="text" class="form-control" id="book_year" name="book_year" placeholder="Year" readonly style="background-color: white;">
+          </div>
+          <div class="form-group">
+            <label for="book_author">Author</label>
+            <input type="text" class="form-control" id="book_author" name="book_author" placeholder="Author">
+          </div>
+          <div class="form-group">
+            <label for="book_publisher">Publisher</label>
+            <input type="text" class="form-control" id="book_publisher" name="book_publisher" placeholder="Publisher">
+          </div>
+        </form>
+        <button id="updateBook" class="btn btn-primary">Submit</button>
+      </div>
+
+    </main>
+
+    <footer class="footer mt-auto py-3">
+      <div class="container">
+        <span class="text-muted">Copyright &copy; 2023 Samuel Christopher Santo - DTS PROA 2023 Python Final Project</span>
+      </div>
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get('id')
+      fetch('http://127.0.0.1:8000/books/' + id, {
+        method: 'GET',
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          document.getElementById('book_id').value = json.books.id;
+          document.getElementById('book_title').value = json.books.title;
+          document.getElementById('book_year').value = json.books.year;
+          document.getElementById('book_author').value = json.books.author;
+          document.getElementById('book_publisher').value = json.books.publisher;
+
+          // // 4. DOM Display result
+          // document.getElementById('table_books').innerHTML = li;
+          console.log(json.books);
+          console.log(json.books.id);
+        });
+        $('#book_year').datepicker({
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'yy',
+            yearRange: "1900:+0",
+            onClose: function(dateText, inst) { 
+                var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                $(this).datepicker('setDate', new Date(year, 1));
+            }
+        });
+        $(".date-picker-year").focus(function () {
+            $(".ui-datepicker-month").hide();
+        });
+
+      $("#updateBook").click(function (e){
+        e.preventDefault();
+        const title = $('#book_title').val();
+        const year = $('#book_year').val();
+        const author = $('#book_author').val();
+        const publisher = $('#book_publisher').val();
+        const data = JSON.stringify({
+          title: title,
+          year: year,
+          author: author,
+          publisher: publisher,
+        });
+
+        console.log(data);
+        let settings = {
+            "url": "http://127.0.0.1:8000/books/" + id,
+            "method": "PUT",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": data,
+        };
+        $.ajax({
+            ...settings,
+            success: function (result) {
+                alert("success")
+                window.location.href = "index.html";
+            },
+            error : function (){
+                alert("error: "+result)
+            }
+        })
+      })
+    </script>
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+</html>

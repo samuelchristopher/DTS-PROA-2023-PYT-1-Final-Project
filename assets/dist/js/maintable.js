@@ -6,7 +6,7 @@ fetch('http://127.0.0.1:8000/books')
     console.log(json.books);
     if (json.books.length == 0) {
       li += `<tr>
-        <td colspan=7>Data Kosong</td>
+        <td colspan=7>Empty Data</td>
       </tr>`;
     }
     json.books.forEach((book) => {

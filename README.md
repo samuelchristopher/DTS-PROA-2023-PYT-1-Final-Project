@@ -14,6 +14,7 @@ Samuel Christopher Santo
 7. uvicorn sebagai package ASGI(Asynchronous Server Gateway Interface) web server untuk Python
 8. pydantic sebagai package validasi data
 9. mysql-connector-python sebagai package untuk konektor Python dengan MySQL
+10. Plugin VSCode [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 
 ## Package Python yang dipakai
 

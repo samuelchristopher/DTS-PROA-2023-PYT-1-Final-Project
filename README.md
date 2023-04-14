@@ -47,16 +47,6 @@ Samuel Christopher Santo
 3. VSCode: download installer VSCode melalui website [code.visualstudio.com/](https://code.visualstudio.com/) berdasarkan OS yang digunakan
 4. Package yang dipakai: `pip install "fastapi[full] pydantic sqlalchemy python-dotenv mysql-connector-python"`
 
-## Cara penggunaan (setelah instalasi)
-
-1. Clone atau download dari [repositori berikut](https://github.com/samuelchristopher/DTS-PROA-2023-PYT-1-Final-Project)
-2. Buka terminal untuk Linux & MacOS atau CMD untuk Windows dan masuk ke dalam clone repositori tersebut
-3. Masuk ke dalam MySQL melalui XAMPP di OS Windows atau melalui terminal dengan command `mysql -u [username] -p` jika menggunakan password atau `mysql -u [username]` jika tanpa password di OS Linux dan MacOS
-4. Setelah berhasil masuk ke MySQL, buat database , contoh `python_mysql` yang akan digunakan untuk project ini.
-5. Selesai membuat database, buka terminal baru dan jalankan command `uvicorn main:app` untuk menjalankan web server Python
-6. Terkait tabel MySQL, setelah menjalankan command `uvicorn main:app`, table akan terbentuk sendiri.
-7. REST API siap digunakan
-
 ## Format file .env
 
 1. File `.env` akan digunakan sebagai environment variable untuk memudahkan penggunaan project. Pada project ini digunakan sebagai penyimpan variable untuk koneksi ke database
@@ -69,6 +59,17 @@ Samuel Christopher Santo
     database=[nama database yang digunakan, contoh disini adalah python_mysql]
    ```
 3. Ganti semua yang dalam kurung kotak menyesuaikan dengan environment masing-masing.
+4. Taruh file `.env` ke root project.
+
+## Cara penggunaan (setelah instalasi)
+
+1. Clone atau download dari [repositori berikut](https://github.com/samuelchristopher/DTS-PROA-2023-PYT-1-Final-Project)
+2. Buka terminal untuk Linux & MacOS atau CMD untuk Windows dan masuk ke dalam clone repositori tersebut
+3. Masuk ke dalam MySQL melalui XAMPP di OS Windows atau melalui terminal dengan command `mysql -u [username] -p` jika menggunakan password atau `mysql -u [username]` jika tanpa password di OS Linux dan MacOS
+4. Setelah berhasil masuk ke MySQL, buat database , contoh `python_mysql` yang akan digunakan untuk project ini.
+5. Selesai membuat database, buka terminal baru dan jalankan command `uvicorn main:app` untuk menjalankan web server Python. Jika terjadi kendala, pastikan kembali file `.env` sesuai format.
+6. Terkait tabel MySQL, setelah menjalankan command `uvicorn main:app`, table akan terbentuk sendiri.
+7. REST API siap digunakan
 
 ## Endpoint REST API
 

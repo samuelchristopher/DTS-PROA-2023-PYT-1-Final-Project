@@ -18,7 +18,7 @@ fetch('http://127.0.0.1:8000/books')
           <td>${book.author}</td>
           <td>${book.publisher}</td>
           <td><span class="badge badge-success">Aktif</span></td>
-          <td><a id="updateBtn" type="button" class="btn btn-primary">Update</a></td>
+          <td><a id="updateBtn" onclick="RESTUpdate(${book.id})" type="button" class="btn btn-primary">Update</a></td>
           <td><a id="deleteBtn" onclick="RESTDelete(${book.id})" type="button" class="btn btn-warning">Delete</a></td>
         </tr>`;
       } else {
@@ -43,4 +43,24 @@ function RESTDelete(id) {
   fetch('http://127.0.0.1:8000/books/' + id, {
     method: 'DELETE',
   }).then(() => location.reload());
+}
+
+function RESTUpdate(id) {
+  window.location.replace('update.html?id=' + id);
+  // fetch('http://127.0.0.1:8000/books/' + id, {
+  //   method: 'GET',
+  // })
+  //   .then((response) => response.json())
+  //   .then((json) => {
+  //     // json.books.forEach((book) => {
+  //     //   $('#book_id').text('jafosijfdo');
+  //     //   document.getElementById('book_id').value = 'fsajiosfo';
+  //     // });
+  //     document.getElementById('book_id').value = 'fsajiosfo';
+
+  //     // // 4. DOM Display result
+  //     // document.getElementById('table_books').innerHTML = li;
+  //     console.log(json.books);
+  //     console.log(json.books.id);
+  //   });
 }
